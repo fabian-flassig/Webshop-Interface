@@ -141,3 +141,5 @@ An example for an open job queue is given in the following. The numeric keys to 
 	},
 }
 ```
+## Final remarks
+The options given here are intended for demonstration purposes only and should be modified accordingly before implementation to fit the specific requirements. Grouping of objects has been omitted, but can in principle be included as a new type of objects that itself can have a table of objects. Check the [>>>documentation<<<](https://github.com/pytha-3d-cad/pytha-lua-api/wiki) for the range of features that can be implemented.
