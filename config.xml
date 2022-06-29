@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://xmlns.pytha.com/plugin_config/1.0">
+  <header>
+    <guid>644a9601-baec-43bb-a5c2-fe47d5bede40</guid>
+    <version>1.1</version>
+    <pytha-version>25.0</pytha-version>
+    <name>Webshop Interface</name>
+    <description>A sample that shows how a webshop interface can be implemented similar to the Webshop XML.</description>
+    <licensing>Copyright (c) 2022 PYTHA Lab GmbH. This plugin is distributed under the terms of the MIT license.</licensing>
+  </header>
+
+  <extension type="function">
+    <entry-point>main</entry-point>
+    <caption>Webshop Import</caption>
+    <description>Import files from e.g. a webshop interface.</description>
+    <help-file>help.html</help-file>
+  </extension>
+ 
+  <extension type="function">
+    <entry-point>database_edit</entry-point>
+    <caption>Webshop Archive</caption>
+    <description>Archive of old jobs.</description>
+    <help-file>help.html</help-file>
+  </extension>
+</plugin>
