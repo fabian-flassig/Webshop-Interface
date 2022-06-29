@@ -1,5 +1,5 @@
 # Webshop-Interface
- **A demo of how to implement a Webshop interface as a PYTHA plugin
+A demo of how to implement a Webshop interface as a PYTHA plugin
 
 ## Introduction
 
@@ -36,9 +36,39 @@ Each job can contain key-value pairs representing customizable information like 
 ### Geometry objects
 The geometry information is stored under the table key `objects`. Each object is represented as an individual table with the key `type` identifying the type of object. Currently implemented types are `"pyo"`, `"ngo"`, `"block"` and `"cylinder"`. Additional types can be implemented similar to these types. Depending on the type, additional keys are required:
 #### `type = "pyo"` 
-`type` | Required | Optional | Description
----|---|---|---
-`pyo` | `file_handle` | `origin`, `attributes`, `parametrics` |  
+Key | Type | Description
+---|---|---
+`file_handle` | Required | `__pytha_load_directory_handle(file_path, file_name)` is used to create a file handle 
+`parametrics` | Optional | A table containing key-value pairs for the parametrics of the pyo-file 
+`attributes` | Optional | A table containing [attributes](https://github.com/pytha-3d-cad/pytha-lua-api/wiki/pytha.set_element_attributes) being assigned to the loaded objects. Can be modified to affect only e.g. the topmost group 
+`origin` | Optional | The relative origin coordinates `{x,y,z}` at which the object is inserted
+
+#### `type = "ngo"` 
+Key | Type | Description
+---|---|---
+`attributes` | Optional | A table containing [attributes](https://github.com/pytha-3d-cad/pytha-lua-api/wiki/pytha.set_element_attributes) being assigned to the created NGO's. 
+
+At least one attribute should be assigned for the NGO to make sense.
+
+#### `type = "block"` 
+Key | Type | Description
+---|---|---
+`length` | Required | Length of the block
+`width` | Required | Width of the block
+`height` | Required | Height of the block
+`attributes` | Optional | A table containing [attributes](https://github.com/pytha-3d-cad/pytha-lua-api/wiki/pytha.set_element_attributes) being assigned to the created block. 
+`origin` | Optional | The relative origin coordinates `{x,y,z}` at which the block is created
+
+#### `type = "cylinder"` 
+Key | Type | Description
+---|---|---
+`height` | Required | Height of the cylinder
+`radius` | Required | Radius of the cylinder
+`attributes` | Optional | A table containing [attributes](https://github.com/pytha-3d-cad/pytha-lua-api/wiki/pytha.set_element_attributes) being assigned to the created cylinder. 
+`origin` | Optional | The relative origin coordinates `{x,y,z}` at which the cylinder is created
+
+#### Example
+An example for an open job queue is given in the following. The numeric keys to the tables are optional and can be omitted, but are displayed here for better visual distinction. Adding a new job to that list requires its insertion before the final closing braces.
 
 ```lua
 { 
@@ -63,24 +93,24 @@ The geometry information is stored under the table key `objects`. Each object is
 		objects = { 
 			[1] = { 
 				type = "pyo",
-				file_handle = __pytha_load_directory_handle("C:\\Users\\fflas\\Desktop\\parametrik.pyo", "parametrik.pyo"),
+				file_handle = __pytha_load_directory_handle("C:\\Users\\fabian\\Desktop\\parametrics.pyo", "parametrics.pyo"),
 				origin = {0,0,0},
 				attributes = { 
 					name = "Cabinet 1",
 				},
 				parametrics = { 
-					hoehe = 2000,
+					height = 2000,
 				},
 			},
 			[2] = { 
 				type = "pyo",
-				file_handle = __pytha_load_directory_handle("C:\\Users\\fflas\\Desktop\\parametrik.pyo", "parametrik.pyo"),
+				file_handle = __pytha_load_directory_handle("C:\\Users\\fabian\\Desktop\\parametrics.pyo", "parametrics.pyo"),
 				origin = {1080,0,0},
 				attributes = { 
 					name = "Cabinet 2",
 				},
 				parametrics = { 
-					hoehe = 1500,
+					height = 1500,
 				},
 			},
 		},
